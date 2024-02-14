@@ -1,8 +1,5 @@
-package com.kunal.catgallery.ui.viewModel
+package com.kunal.catgallery.ui.viewModels
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kunal.catgallery.data.AppConstants
