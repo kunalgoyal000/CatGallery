@@ -5,6 +5,8 @@ import com.kunal.catgallery.data.api.ApiService
 import com.kunal.catgallery.data.dataSource.CatDataSource
 import com.kunal.catgallery.data.dataSource.CatDataSourceImpl
 import com.kunal.catgallery.ui.repository.CatRepository
+import com.kunal.catgallery.utils.DefaultDispatcherProvider
+import com.kunal.catgallery.utils.DispatcherProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,5 +61,11 @@ class AppModule {
     @Singleton
     fun providesCatRepository(catDataSource: CatDataSource): CatRepository {
         return CatRepository(catDataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun providesDispatcher(defaultDispatcherProvider: DefaultDispatcherProvider): DispatcherProvider {
+        return defaultDispatcherProvider
     }
 }

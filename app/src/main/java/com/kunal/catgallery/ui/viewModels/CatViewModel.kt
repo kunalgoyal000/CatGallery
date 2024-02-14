@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.kunal.catgallery.data.AppConstants
 import com.kunal.catgallery.data.entity.Cat
 import com.kunal.catgallery.ui.repository.CatRepository
+import com.kunal.catgallery.utils.DispatcherProvider
 import com.kunal.catgallery.utils.ResourceState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -16,18 +16,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CatViewModel @Inject constructor(
-    private val catRepository: CatRepository
+    private val catRepository: CatRepository,
+    private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
-    private val _cats: MutableStateFlow<ResourceState<List<Cat>>> = MutableStateFlow(ResourceState.Loading())
+    private val _cats: MutableStateFlow<ResourceState<List<Cat>>> =
+        MutableStateFlow(ResourceState.Loading())
     val cats: StateFlow<ResourceState<List<Cat>>> = _cats
 
     init {
         getCats(AppConstants.LIMIT)
     }
 
-    private fun getCats(limit: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
+    fun getCats(limit: Int) {
+        viewModelScope.launch(dispatcherProvider.io) {
             catRepository.getCats(limit)
                 .collectLatest { catsResponse ->
                     _cats.value = catsResponse
@@ -35,7 +37,7 @@ class CatViewModel @Inject constructor(
         }
     }
 
-    companion object{
+    companion object {
         const val TAG = "CatViewModel"
     }
 

@@ -49,21 +49,23 @@ android {
 
 dependencies {
 
+    //JETPACK COMPOSE
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
     implementation(libs.androidx.compose.foundation)
 
-    // Android Studio Preview support
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    // Material Design 3
+    //PREVIEW TOOLING
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+
+    //MATERIAL DESIGN 3
     implementation(libs.androidx.compose.material3)
 
     implementation(libs.core.ktx)
@@ -74,21 +76,23 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     //NETWORKING LIBRARY
-    implementation (libs.retrofit)
+    implementation(libs.retrofit)
     implementation(libs.gson)
-
-    // define a BOM and its version
     implementation(platform(libs.okhttp.bom))
-
-    // define any required OkHttp artifacts without version
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
 
     //IMAGE LOADING LIBRARY
-    implementation (libs.coil)
+    implementation(libs.coil)
 
-    // ViewModel utilities for Compose
-    implementation (libs.androidx.lifecycle.viewmodel.compose)
+    //UNIT TESTING
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("app.cash.turbine:turbine:1.0.0")
+//    testImplementation ("org.mockito.kotlin:mockito-kotlin:5.3.0")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
 
     //DAGGER - HILT
     implementation(libs.hilt.android)
